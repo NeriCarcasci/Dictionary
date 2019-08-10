@@ -4,11 +4,13 @@ from difflib import get_close_matches
 data = json.load(open("data.json"))
 
 def describer(word):
-    if not word in data :
-        word = word.lower()
-        word = word.strip(" ")
+    word = word.lower()
     if word in data:
         print(data[word])
+    elif word.title() in data:
+        print(data[word.title()])
+    elif word.upper() in data: #in case user enters words like USA or NATO
+        print(data[word.upper()])
     elif len(get_close_matches(word, data.keys())) >0:
         question = ("Word not found, did you mean %s?" %get_close_matches(word, data.keys())[0])
         corrector = input(question)
@@ -35,7 +37,7 @@ def closer():
     elif decision == "n":
         print("Goodbye")
     else:
-        print("Please type answer again")
+        print("answer invalid")
         closer()
 
 def go():
