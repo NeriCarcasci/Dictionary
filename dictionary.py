@@ -4,8 +4,9 @@ from difflib import get_close_matches
 data = json.load(open("data.json"))
 
 def describer(word):
-    word = word.lower()
-    word = word.strip(" ")
+    if not word in data :
+        word = word.lower()
+        word = word.strip(" ")
     if word in data:
         print(data[word])
     elif len(get_close_matches(word, data.keys())) >0:
