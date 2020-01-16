@@ -4,7 +4,7 @@ import wikipedia as wk
 
 data = json.load(open("data.json"))
 
-def wikipedia_open(word):
+def wikipedia_search(word):
     word = word.strip("wikipedia")
     if "search" in word:
             word = word.strip("search")
@@ -29,7 +29,7 @@ def decoder(word):
             print(data[word])
         elif word.title() in data:
             print(data[word.title()])
-        elif word.upper() in data: #in case user enters words like USA or NATO
+        elif word.upper() in data: 
             print(data[word.upper()])
         elif len(get_close_matches(word, data.keys())) >0:
             question = ("Word not found, did you mean %s?" %get_close_matches(word, data.keys())[0])
@@ -53,14 +53,14 @@ def closer():
     decision = decision.lower()
     decision = decision.strip(" ")
     if decision == "y":
-        go()
+        starter()
     elif decision == "n":
         print("Goodbye")
     else:
         print("answer invalid")
         closer()
 
-def go():
+def starter():
     user_input = input("word:")
     decoder(user_input)
     closer()
